@@ -37,5 +37,4 @@ Brick.scad module rooftile(Xbrick, Zbrick, OverlapX, OverlapZ)
 Creates a roof. Xbrick defines how much tiles used in width and Zbrick how much in height.
 OverlapX adjusts the roof in width and OverlapZ in Z direction.
 
-
-
+Uncomment the lines on the bottom of the file Brick.scad to try out the functions.
