@@ -1,4 +1,4 @@
-include <brick_double.scad>;
+include <brick.scad>;
 
 // Nebengebaeude Fritzlar
 
