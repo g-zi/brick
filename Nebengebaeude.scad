@@ -376,8 +376,8 @@ translate([ 31.975*(Bl+Fg), 0, 19*(Bh+Fg) ]) brickbow(10, 100, 0.7, 2);
 // Dach ////////////////////////////////////////////////////////////////////
 
 difference() { union() {
-translate([ -22, -75, 315 ]) rotate(a=[26,0,0]) rooftile( 46, 10, 0, 0);
-translate([ 1222, 500, 315 ]) rotate(a=[26,0,180]) rooftile( 46, 10, 0, 0);
+translate([ -22, -70, 315 ]) rotate(a=[26,0,0]) rooftile( 46, 10, 0, 0);
+translate([ 1222, 505, 315 ]) rotate(a=[26,0,180]) rooftile( 46, 10, 0, 0);
 }
 // Dach abschneiden
 rotate(a=-20 ,v=[1,0,0])
@@ -388,18 +388,46 @@ cube([300, 200, 300]);
 translate([951, 391, 365]) cube([26, 26, 50]); // Schornstein freischneiden
 }
 
+// Dachabschluss Links
+translate([-25, 210, 512]) 
+rotate(a=-35,v=[1,0,0])
+cube([3, 360, 14]);
+translate([-25, -69, 306]) 
+rotate(a=35,v=[1,0,0])
+cube([3, 360, 14]);
+// Dachabschluss Rechts
+translate([1222, 210, 512]) 
+rotate(a=-35,v=[1,0,0])
+cube([3, 360, 14]);
+translate([1222, -69, 306]) 
+rotate(a=35,v=[1,0,0])
+cube([3, 360, 14]);
+// First
+translate([-22, 210, 512]) 
+rotate(a=-35,v=[1,0,0])
+cube([1244, 17, 14]);
+translate([-22, 212, 503]) 
+rotate(a=35,v=[1,0,0])
+cube([1244, 17, 14]);
 
 difference() { union() {
-translate([ 805, -85, 315 ]) rotate(a=[26,0,90]) rooftile( 8, 7, 0, 0);
-translate([ 395, 134, 315 ]) rotate(a=[26,0,270]) rooftile( 8, 7, 0, 0);
+translate([ 805, -80, 315 ]) rotate(a=[26,0,90]) rooftile( 8, 7, 0, 0);
+translate([ 395, 139, 315 ]) rotate(a=[26,0,270]) rooftile( 8, 7, 0, 0);
+// First
+translate([592, -83, 449]) 
+rotate(a=-35,v=[0,1,0])
+cube([17, 230, 10]);
+translate([595, -83, 458]) 
+rotate(a=35,v=[0,1,0])
+cube([17, 230, 10]);
 }
 // Dach abschneiden
-translate([403, -94, 255]) 
+translate([403, -89, 255]) 
 rotate(a=-35,v=[0,1,0])
 rotate(a=39.5,v=[0,0,1])
 cube([363, 185, 100]);
 
-translate([793, -94, 255]) 
+translate([793, -89, 255]) 
 mirror([ 1, 0, 0 ]) 
 rotate(a=-35,v=[0,1,0])
 rotate(a=39.5,v=[0,0,1])
@@ -417,3 +445,13 @@ translate([ 0, Bl+Fg+Bw+Fg, 0]) wallhalf(2,18, 0,0, 0);
 translate([ Bw+Bl+Fg+Bw+Fg, 0, 0]) rotate(a=[0,0,90]) wallhalf(2,18, 0,0, 1);
 }
 // Schornstein /////////////////////////////////////////////////////////////
+
+
+// Dachabschluss ///////////////////////////////////////////////////////////
+translate([395, -83, 306]) 
+rotate(a=-35,v=[0,1,0])
+cube([260, 3, 14]);
+translate([592, -83, 455]) 
+rotate(a=35,v=[0,1,0])
+cube([260, 3, 14]);
+// Dachabschluss ///////////////////////////////////////////////////////////
