@@ -189,17 +189,17 @@ module reiter(Xbrick, MoveCement=0, MoveReiter=0, AdjustReiter=0, Halfbrick=0)  
 //translate([ 0, 0, 0 ]) reiter( 4.5, -4, 0,0, 0);
 
 
-module brickbow(Bricks, Radius, Space=0, Half=0) ////////////////////////////////////////////////////////////
-{ // Alpha = Kreisbogen / ( Radius * 2 * 3.14 ) * 360
-  Alpha = (Bh / ((Radius-Bw) * 2 * 3.14 ) * 360) + Space;
-  Kreisbogen = (Radius+Fg) * 2 * 3.14 * (Alpha / 360)-Fg*4;
+
+module brickbow(Bricks, Radius, Space=0, Half=1, Thick=Bl, Height=Bl, Width=Bh, Cement=1) //////////////////////////////////////////////////////
+{ // Alpha = Kreisbogen / ( Radius * 2 * Pi ) * 360
+  Alpha = (Width / ((Radius-Height/2) * 2 * Pi ) * 360) + Space;
 
   // s = 2 * r * sin * (Alpha/2)
-  Segmentwidth = 2 * (Radius-Bl/2) * sin( Alpha * Bricks / 2 );
+  Segmentwidth = 2 * (Radius-Height/2) * sin( Alpha * Bricks / 2 );
   // h = r * ( 1 - cos ( Alpha / 2 ) )
-  Segmentheight = (Radius-Bl/2) * ( 1 - cos ( Alpha * Bricks / 2 ));
+  Segmentheight = (Radius-Height/2) * ( 1 - cos ( Alpha * Bricks / 2 ));
 
-  translate([Segmentwidth/2, (Bw+Fg)/2, -Radius+Segmentheight+Bl/2])
+  translate([Segmentwidth/2, Thick/2, -Radius+Segmentheight+Height/2])
   union() 
   {
     rotate([0,-Alpha*(Bricks-1)/2,0])
@@ -207,22 +207,41 @@ module brickbow(Bricks, Radius, Space=0, Half=0) ///////////////////////////////
     {
       if(round(i/Half)!=i/Half)
       {
-        rotate([0,i*Alpha,0]) translate([0, Bw/2, Radius+Bw/2+Fg/2]) cube([Bh, Bl, Bw],center = true);
-        rotate([0,i*Alpha,0]) translate([0, Bw/2, Radius-Bw/2-Fg/2]) cube([Bh, Bl, Bw],center = true);
+        rotate([0,i*Alpha,0]) translate([0, 0, Radius+(Height-Fg)/4+Fg/2]) cube([Width, Thick, (Height-Fg)/2],center = true);
+        rotate([0,i*Alpha,0]) translate([0, 0, Radius-(Height-Fg)/4-Fg/2]) cube([Width, Thick, (Height-Fg)/2],center = true);
       }
-      if(round(i/Half)==i/Half) rotate([0,i*Alpha,0]) translate([0, Bw/2, Radius]) cube([Bh, Bl, Bl],center = true);
-      rotate([0,i*Alpha,0]) translate([0, Bw/2, Radius+Fg/2]) cube([Bh+Fg*2, Bl-Fg*2, Bl+Fg],center = true);
+      if(round(i/Half)==i/Half) rotate([0,i*Alpha,0]) translate([0, 0, Radius]) cube([Width, Thick, Height],center = true);
+      if(Cement==1) rotate([0,i*Alpha,0]) translate([0, 0, Radius+Fg/2]) cube([Width+Fg*2, Thick-Fg*2, Height+Fg],center = true);
     }
-    rotate([0,-Alpha*(Bricks-1)/2+Alpha/2,0])
-    for ( i = [0 : Bricks-2] )
-    { rotate([0,i*Alpha,0]) translate([0, Bw/2, Radius+Fg]) cube([Kreisbogen, Bl-Fg*2, Bl],center = true); }
   }
 }
+//translate([ 0, 0, 0 ]) brickbow( 10, 50, 0.2, 2, Bl, Bl, Bh, 1 ); 
+// Xn, Radius, Zwischenraum, halbe Ziegel, Dicke, Hoehe, Ziegelbreite, Zement
+
+
+module bbcut(Bricks, Radius, Space=0, Half=0, Thick=Bl, Height=Bl, Width=Bh) ///////////////////////////////////////////////////////////////////////
+{ // Alpha = Kreisbogen / ( Radius * 2 * 3.14 ) * 360
+  Alpha = (Width / ((Radius-Height/2) * 2 * Pi ) * 360) + Space;
+
+  // s = 2 * r * sin * (Alpha/2)
+  Segmentwidth = 2 * (Radius-Height/2) * sin( Alpha * Bricks / 2 );
+  // h = r * ( 1 - cos ( Alpha / 2 ) )
+  Segmentheight = (Radius-Height/2) * ( 1 - cos ( Alpha * Bricks / 2 ));
+
+  translate([Segmentwidth/2, Thick/2, -Radius+Segmentheight+Height/2])
+  union() 
+  {
+    rotate([0,-Alpha*(Bricks-1)/2,0])
+    for ( i = [0 : Bricks-1] )
+    { rotate([0,i*Alpha,0]) translate([0, 0, Radius+Fg/2]) cube([Width+Fg*2, Thick-Fg*2, Height+Fg],center = true); }
+  }
+}
+//translate([ 0, 0, 0 ]) bbcut( 10, 50, 0.2, Bl, Bl, Bh ); // Xn, Radius, Zwischenraum, halbe Ziegel, Dicke, Hoehe, Ziegelbreite, Zement
+//translate([ 0, 0, 0 ]) bbcut( 18, 120, 0.72 );
 
 
 
-
-module brickcircle( Radius, Bricks, r1=0, r2=360, Corr=0, Zement=0 ) ////////////////////////////////////////////////////////////
+module brickcircle( Radius, Bricks, r1=0, r2=360, Corr=0, Zement=0, Blx=Bl, Bwx=Bw, Bhx=Bh ) ///////////////////////////////
 { // dependencies module sector
 //echo("Winkel", 2*asin((Bh+Fg)/(2*Radius)) );
 //echo("tan a = ", Radius-sqrt(Radius*Radius- (Bh/2)*(Bh/2)   ));
@@ -236,31 +255,31 @@ r1=r1-r1*2; // im Uhrzeigersinn
 r2=r2-r2*2; // im Uhrzeigersinn
 
 Umfang=Pi*Radius*2;
-Anzahl=(Umfang-Umfang%(Bw+Fg))/(Bw+Fg);
+Anzahl=(Umfang-Umfang%(Bwx+Fg))/(Bwx+Fg);
 Winkel=-360/Anzahl;
 
 
   for ( j = [ 0 : 1 : Bricks-1 ]) {
     for ( i = [ r1 : Winkel : r2 ]) {
-      rotate([0,0, Winkel*(j%2)/2+i ]) translate([0, Radius-Bl/2, (Bh+Fg)*j+(Bh)/2+Fg]) cube([Bw,Bl,Bh], center=true );}}
+      rotate([0,0, Winkel*(j%2)/2+i ]) translate([0, Radius-Blx/2, (Bhx+Fg)*j+(Bhx)/2+Fg]) cube([Bwx,Blx,Bhx], center=true );}}
 
   if((r1 == 0) && (r2 == -360)) {
     difference() {
-      cylinder(h=(Bh+Fg)*Bricks-Fg+Zement, r=Radius-Fg, $fn=Radius*2 );
-      translate([ 0, 0, -1 ]) cylinder(h=(Bh+Fg)*Bricks-Fg+2+Zement, r=Radius+Fg-Bl, $fn=Radius*2 );}
+      cylinder(h=(Bhx+Fg)*Bricks-Fg+Zement, r=Radius-Fg, $fn=Radius*2 );
+      translate([ 0, 0, -1 ]) cylinder(h=(Bhx+Fg)*Bricks-Fg+2+Zement, r=Radius+Fg-Blx, $fn=Radius*2 );}
 }
   else {
     if(r2-r1 >= -177) { 
       difference() {
-        rotate([0,0,r1-Winkel/4+Corr]) sector(Radius-Fg, r2-r1+Winkel/2-Corr, (Bh+Fg)*Bricks-Fg+Zement);
-        translate([ 0, 0, -1 ]) rotate([0,0,r1-Winkel/4+0.1+Corr]) sector(Radius+Fg-Bl, r2-r1+Winkel/2-0.2-Corr, (Bh+Fg)*Bricks+Zement);}}
+        rotate([0,0,r1-Winkel/4+Corr]) sector(Radius-Fg, r2-r1+Winkel/2-Corr, (Bhx+Fg)*Bricks-Fg+Zement);
+        translate([ 0, 0, -1 ]) rotate([0,0,r1-Winkel/4+0.1+Corr]) sector(Radius+Fg-Blx, r2-r1+Winkel/2-0.2-Corr, (Bhx+Fg)*Bricks+Zement);}}
     else {    
       difference() {
-        rotate([0,0,r1-Winkel/4+Corr]) sector(Radius-Fg, -177-Winkel/2-Corr, (Bh+Fg)*Bricks-Fg+Zement);
-        translate([ 0, 0, -1 ]) rotate([0,0,r1-Winkel/4+0.1+Corr]) sector(Radius+Fg-Bl, -177-Winkel/2-0.2-Corr, (Bh+Fg)*Bricks+Zement);}
+        rotate([0,0,r1-Winkel/4+Corr]) sector(Radius-Fg, -177-Winkel/2-Corr, (Bhx+Fg)*Bricks-Fg+Zement);
+        translate([ 0, 0, -1 ]) rotate([0,0,r1-Winkel/4+0.1+Corr]) sector(Radius+Fg-Blx, -177-Winkel/2-0.2-Corr, (Bhx+Fg)*Bricks+Zement);}
       difference() {
-        rotate([0,0,-177+r1-Winkel+Corr]) sector(Radius-Fg, 177+r2-r1+Winkel-Corr, (Bh+Fg)*Bricks-Fg+Zement);
-        translate([ 0, 0, -1 ]) rotate([0,0,-177+r1-Winkel+0.1+Corr]) sector(Radius+Fg-Bl, 177+r2-r1+Winkel-0.2-Corr, (Bh+Fg)*Bricks+Zement);}}}
+        rotate([0,0,-177+r1-Winkel+Corr]) sector(Radius-Fg, 177+r2-r1+Winkel-Corr, (Bhx+Fg)*Bricks-Fg+Zement);
+        translate([ 0, 0, -1 ]) rotate([0,0,-177+r1-Winkel+0.1+Corr]) sector(Radius+Fg-Blx, 177+r2-r1+Winkel-0.2-Corr, (Bhx+Fg)*Bricks+Zement);}}}
 }
 //translate([ 0, 0, 0 ]) brickcircle( 200, 5, 0, 360, 0, 20); // Radius, Bricks, Startwinkel, Winkel, Zementkorrektur, Zementhoehe
 
@@ -284,29 +303,6 @@ module sector(Radius, Winkel, Height)
 }
 //sector(100,160,11); // Radius, Winkel, Height
 
-
-module bbcut(Bricks, Radius, Space=0) ///////////////////////////////////////////////////////////////////////
-{ // Alpha = Kreisbogen / ( Radius * 2 * 3.14 ) * 360
-  Alpha = (Bh / ((Radius-Bw) * 2 * 3.14 ) * 360) + Space;
-  Kreisbogen = (Radius+Fg) * 2 * 3.14 * (Alpha / 360)-Fg*4;
-
-  // s = 2 * r * sin * (Alpha/2)
-  Segmentwidth = 2 * (Radius-Bl/2) * sin( Alpha * Bricks / 2 );
-  // h = r * ( 1 - cos ( Alpha / 2 ) )
-  Segmentheight = (Radius-Bl/2) * ( 1 - cos ( Alpha * Bricks / 2 ));
-
-  translate([Segmentwidth/2, (Bw+Fg)/2, -Radius+Segmentheight+Bl/2])
-  union() 
-  {
-    rotate([0,-Alpha*(Bricks-1)/2,0])
-    for ( i = [0 : Bricks-1] )
-    { rotate([0,i*Alpha,0]) translate([0, Bw/2, Radius+Fg/2]) cube([Bh+Fg*2, Bl, Bl+Fg],center = true); }
-
-    rotate([0,-Alpha*(Bricks-1)/2+Alpha/2,0])
-    for ( i = [0 : Bricks-2] )
-    { rotate([0,i*Alpha,0]) translate([0, Bw/2, Radius+Fg]) cube([Kreisbogen, Bl, Bl],center = true); }
-  }
-}
 
 
 module basement(LeftFlat, Xbrick, RightFlat, Adjust=0) ////////////////////////////////////////////////////////////////
