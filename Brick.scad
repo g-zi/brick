@@ -219,7 +219,7 @@ module brickbow(Bricks, Radius, Space=0, Half=1, Thick=Bl, Height=Bl, Width=Bh, 
 // Xn, Radius, Zwischenraum, halbe Ziegel, Dicke, Hoehe, Ziegelbreite, Zement
 
 
-module bbcut(Bricks, Radius, Space=0, Half=0, Thick=Bl, Height=Bl, Width=Bh) ///////////////////////////////////////////////////////////////////////
+module bbcut(Bricks, Radius, Space=0, Half=0, Thick=Bl+Fg*2, Height=Bl, Width=Bh) ///////////////////////////////////////////////////////////////////////
 { // Alpha = Kreisbogen / ( Radius * 2 * 3.14 ) * 360
   Alpha = (Width / ((Radius-Height/2) * 2 * Pi ) * 360) + Space;
 
@@ -228,7 +228,7 @@ module bbcut(Bricks, Radius, Space=0, Half=0, Thick=Bl, Height=Bl, Width=Bh) ///
   // h = r * ( 1 - cos ( Alpha / 2 ) )
   Segmentheight = (Radius-Height/2) * ( 1 - cos ( Alpha * Bricks / 2 ));
 
-  translate([Segmentwidth/2, Thick/2, -Radius+Segmentheight+Height/2])
+  translate([Segmentwidth/2, Thick/2-Fg, -Radius+Segmentheight+Height/2])
   union() 
   {
     rotate([0,-Alpha*(Bricks-1)/2,0])
@@ -238,6 +238,7 @@ module bbcut(Bricks, Radius, Space=0, Half=0, Thick=Bl, Height=Bl, Width=Bh) ///
 }
 //translate([ 0, 0, 0 ]) bbcut( 10, 50, 0.2, Bl, Bl, Bh ); // Xn, Radius, Zwischenraum, halbe Ziegel, Dicke, Hoehe, Ziegelbreite, Zement
 //translate([ 0, 0, 0 ]) bbcut( 18, 120, 0.72 );
+//translate([ 0, 0, 0 ]) brickbow( 18, 120, 0.72,2 );
 
 
 

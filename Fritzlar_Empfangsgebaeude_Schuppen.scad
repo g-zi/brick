@@ -539,8 +539,8 @@ translate([ 124*(Bl+Fg)-Fg, -5.5*(Bl+Fg), -Bw-Fg ]) rotate([0,0,90]) basement( 0
 translate([ 124*(Bl+Fg)-Fg, -6*(Bl+Fg), -12*(Bh+Fg)-Bw-Fg ]) rotate([0,0,90]) wall(36, 12, 0,0, 1);
 
 
-*/
 
+*/
 
 
 
@@ -620,6 +620,9 @@ translate([ 140*(Bl+Fg)-3, -4.5*(Bl+Fg)-Fg+i, 55*(Bh+Fg) ]) cube([Bw,Bw,Bh]);
 // Keller 
 translate([ 140.5*(Bl+Fg)-Fg, -6.1*(Bl+Fg), -5*(Bh+Fg)-Bw-Fg ]) rotate([0,0,90]) basement( 0, 20, 0, 3.5);
 translate([ 140.5*(Bl+Fg)-Fg, -6.5*(Bl+Fg), -12*(Bh+Fg)-Bw-Fg ]) rotate([0,0,90]) wall(6.4, 7, 0,0,1);
+
+
+
 
 // Empfangsgebaeude Mitte ###########################################################################
 // Hinten 1. Teil
@@ -835,6 +838,8 @@ translate([ 296*(Bw+Fg)-Fg, 33.5*(Bl+Fg), (Bh+Fg)*4 ]) cube([ 13.5*(Bw+Fg)+Fg, B
 translate([ 124*(Bl+Fg)-Fg, 33.5*(Bl+Fg)+Bh, -5*(Bh+Fg)-Bw-Fg ]) basement( 1, 145, 0, 4.5);
 translate([ 124*(Bl+Fg), 33.5*(Bl+Fg)+Bh, -12*(Bh+Fg)-Bw-Fg ]) wall(44, 7, 0,0,1);
 
+
+
 // Abschluss +++++++++++++++++++++++
 translate([ 168.25*(Bl+Fg)-Fg, 0, -5*(Bh+Fg) ]) rotate([0,0,90]) wallhalf(2.5, 115, 0,0,0);
 translate([ 168*(Bl+Fg)-Fg*2, 0, -5*(Bh+Fg) ]) rotate([0,0,90]) wall(34.5, 115, 0,0,1);
@@ -843,7 +848,7 @@ translate([ 168.25*(Bl+Fg)-Fg, 32*(Bl+Fg)+Bh, -5*(Bh+Fg) ]) rotate([0,0,90]) wal
 translate([ 168.25*(Bl+Fg)-Fg, Bl, -5*(Bh+Fg)-Bw-Fg ]) rotate([0,0,90]) basement( 0, 115, 0, 2);
 translate([ 168.25*(Bl+Fg)-Fg, Bw, -12*(Bh+Fg)-Bw-Fg ]) rotate([0,0,90]) wall(34.3, 7, 0,0,0);
 
-
+/*
 
 
 
@@ -922,14 +927,143 @@ translate([ 145*(Bl+Fg)+Fg, 35*(Bl+Fg)-Bw+Fg, Bw+2*(Bh+Fg)  ]) cube([Bl-Fg*3, 5*
 translate([ 145*(Bl+Fg)+Fg, 35*(Bl+Fg)-Bw+Fg, Bw*3+22*(Bh+Fg)   ]) cube([Bl-Fg*3, 12*(Bl+Fg)-Bw-Fg*2, 5*(Bh+Fg) ]);
 
 
+*/
+
+
+
+// Empfangsgebaeude Aufenthaltsraum ########################################################################
+// Hinten
+// Ornament Mitte
+translate([ 168.75*(Bl+Fg), 2.5*(Bl+Fg)-Fg, 57*(Bh+Fg) ]) wallhalf(20.5,1,0,0,1);
+for ( i = [ 0 : Bl+Fg : 18*(Bl+Fg) ])
+translate([ 169.25*(Bl+Fg)+i, 2.5*(Bl+Fg)-Fg+2.5, 56*(Bh+Fg) ]) cube([Bw,Bw,Bh]);
+for ( i = [ 0 : Bl+Fg : 18*(Bl+Fg) ])
+translate([ 169.75*(Bl+Fg)+i, 2.5*(Bl+Fg)-Fg+5, 56*(Bh+Fg) ]) cube([Bw,Bw,Bh]);
+for ( i = [ 0 : Bl+Fg : 18*(Bl+Fg) ])
+translate([ 169.25*(Bl+Fg)+i, 2.5*(Bl+Fg)-Fg+5, 55*(Bh+Fg) ]) cube([Bw,Bw,Bh]);
+
+difference(){union(){
+translate([ 168*(Bl+Fg)-Fg*2, 2.5*(Bl+Fg)-Fg, -5*(Bh+Fg) ]) wallhalf(1.5, 89, 0,0,1);
+translate([ 168*(Bl+Fg)-Fg*2, 2.5*(Bl+Fg)+Bw/2, -5*(Bh+Fg) ]) wall( 2.5 , 44, 0, 0, 1 );
+translate([ 177.25*(Bl+Fg), 2.5*(Bl+Fg)+Bw/2, -5*(Bh+Fg) ]) wall(2.5, 44, 0,0,1);
+translate([ 186.75*(Bl+Fg), 2.5*(Bl+Fg)+Bw/2, -5*(Bh+Fg) ]) wall(3, 44, 0,0,1);
+translate([ 168*(Bl+Fg)-Fg*2, 2.5*(Bl+Fg)+Bw/2, 39*(Bh+Fg) ]) wall(4, 1, 0,0,1);
+translate([ 175.5*(Bl+Fg), 2.5*(Bl+Fg)+Bw/2, 39*(Bh+Fg) ]) wall(6, 1, 0,0,1);
+translate([ 185*(Bl+Fg), 2.5*(Bl+Fg)+Bw/2, 39*(Bh+Fg) ]) wall(4.75, 1, 0,0,1);
+translate([ 168*(Bl+Fg)-Fg*2, 2.5*(Bl+Fg)+Bw/2, 40*(Bh+Fg) ]) wall(21.91, 18, 0,0,0);
+translate([ 187.75*(Bl+Fg), 2.5*(Bl+Fg)-Fg, -5*(Bh+Fg) ]) wallhalf(2, 89, 0,0,1);
+
+// Fenster oben
+translate([ 168*(Bl+Fg)-Fg*2, 2.5*(Bl+Fg)+Bw/2, 58*(Bh+Fg) ]) wall(3.43, 18, 0,0,0);
+translate([ 173.25*(Bl+Fg), 2.5*(Bl+Fg)+Bw/2, 58*(Bh+Fg) ]) wall(1, 18, 0,0,0);
+translate([ 176.25*(Bl+Fg), 2.5*(Bl+Fg)+Bw/2, 58*(Bh+Fg) ]) wall(4.5, 18, 0,0,0);
+translate([ 182.75*(Bl+Fg), 2.5*(Bl+Fg)+Bw/2, 58*(Bh+Fg) ]) wall(1, 18, 0,0,0);
+translate([ 186*(Bl+Fg)-Fg*2, 2.5*(Bl+Fg)+Bw/2, 58*(Bh+Fg) ]) wall(3.91, 18, 0,0,0);
+translate([ 168*(Bl+Fg)-Fg*2, 2.5*(Bl+Fg)+Bw/2, 76*(Bh+Fg) ]) wall(21.91, 8, 0,0,0);
+}
+
+
+translate([ 170.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Bh, (Bh+Fg)*35 ]) bbcut( 26, 150, 0.85, 2 );
+translate([ 170.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+0.5*(Bl+Fg)+Bh, (Bh+Fg)*34.2 ]) bbcut( 22, 130, 0.95, 1, Bw, Bw, Bh, 1 ); 
+translate([ 179.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Bh, (Bh+Fg)*35 ]) bbcut( 26, 150, 0.85, 2 );
+translate([ 180.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+0.5*(Bl+Fg)+Bh, (Bh+Fg)*34.2 ]) bbcut( 22, 130, 0.95, 1, Bw, Bw, Bh, 1 ); 
+
+translate([ 171.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) bbcut( 9, 70, 0.65 );
+translate([ 174.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) bbcut( 9, 70, 0.65 );
+translate([ 180.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) bbcut( 9, 70, 0.65 );
+translate([ 183.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) bbcut( 9, 70, 0.65 );
+
+
+
+}
+translate([ 170.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Bh, (Bh+Fg)*35 ]) brickbow( 26, 150, 0.85, 2 );
+translate([ 169.63*(Bl+Fg)-Fg, 2.5*(Bl+Fg)-0.2*(Bl+Fg)+Bh, (Bh+Fg)*37.7 ]) brickbow( 17, 165, 0.99, 1, Bl, Bh, Bw, 0 ); 
+translate([ 170.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+0.5*(Bl+Fg)+Bh, (Bh+Fg)*34.2 ]) brickbow( 22, 130, 0.95, 1, Bw, Bw, Bh, 1 ); 
+// Xn, Radius, Zwischenraum, halbe Ziegel, Dicke, Hoehe, Ziegelbreite, Zement
+translate([ 179.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Bh, (Bh+Fg)*35 ]) brickbow( 26, 150, 0.85, 2 );
+translate([ 179.13*(Bl+Fg)-Fg, 2.5*(Bl+Fg)-0.2*(Bl+Fg)+Bh, (Bh+Fg)*37.7 ]) brickbow( 17, 165, 0.99, 1, Bl, Bh, Bw, 0 ); 
+translate([ 180.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+0.5*(Bl+Fg)+Bh, (Bh+Fg)*34.2 ]) brickbow( 22, 130, 0.95, 1, Bw, Bw, Bh, 1 ); 
+
+translate([ 171.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) brickbow( 9, 70, 0.65, 2 );
+translate([ 174.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) brickbow( 9, 70, 0.65, 2 );
+translate([ 180.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) brickbow( 9, 70, 0.65, 2 );
+translate([ 183.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) brickbow( 9, 70, 0.65, 2 );
+
+
+// Fenster unten
+translate([ 169.75*(Bl+Fg), 2.5*(Bl+Fg)+Bw+Bh+Fg, 5*(Bh+Fg) ]) wallhalf(1, 32, 0,0,1);
+translate([ 176.75*(Bl+Fg), 2.5*(Bl+Fg)+Bw+Bh+Fg, 5*(Bh+Fg) ]) wallhalf(1, 32, 0,0,1);
+translate([ 169.75*(Bl+Fg), 2.5*(Bl+Fg)+Bw+Bh+Fg, -5*(Bh+Fg) ]) wallhalf(8, 10, 0,0,1);
+
+translate([ 179.25*(Bl+Fg), 2.5*(Bl+Fg)+Bw+Bh+Fg, 5*(Bh+Fg) ]) wallhalf(1, 32, 0,0,1);
+translate([ 186.25*(Bl+Fg), 2.5*(Bl+Fg)+Bw+Bh+Fg, 5*(Bh+Fg) ]) wallhalf(1, 32, 0,0,1);
+translate([ 179.25*(Bl+Fg), 2.5*(Bl+Fg)+Bw+Bh+Fg, -5*(Bh+Fg) ]) wallhalf(8, 10, 0,0,1);
+
+// Ornament Unten
+translate([ 169.75*(Bl+Fg), 2.5*(Bl+Fg)+Bw+Fg/2, -5*(Bh+Fg) ]) wallhalf(8, 1, 0,0,1);
+for ( i = [ 0 : 33 : 180 ]) {
+translate([ 170.15*(Bl+Fg)+i, 2.5*(Bl+Fg)+Bw+Fg/2, -4*(Bh+Fg) ]) wallhalf(0.55, 6, 0,0,1);
+translate([ 169.9*(Bl+Fg)+i, 2.5*(Bl+Fg)+Bw+Fg/2, 2*(Bh+Fg) ]) wallhalf(1, 1, 0,0,1);}
+translate([ 169.75*(Bl+Fg), 2.5*(Bl+Fg)+Bw+Fg/2, 3*(Bh+Fg) ]) wallhalf(8, 2, 0,0,0);
+
+translate([ 180.25*(Bl+Fg), 2.5*(Bl+Fg)+Bw+Fg/2, -5*(Bh+Fg) ]) wallhalf(8, 1, 0,0,1);
+for ( i = [ 0 : 33 : 180 ]) {
+translate([ 180.65*(Bl+Fg)+i, 2.5*(Bl+Fg)+Bw+Fg/2, -4*(Bh+Fg) ]) wallhalf(0.55, 6, 0,0,1);
+translate([ 180.4*(Bl+Fg)+i, 2.5*(Bl+Fg)+Bw+Fg/2, 2*(Bh+Fg) ]) wallhalf(1, 1, 0,0,1);}
+translate([ 180.25*(Bl+Fg), 2.5*(Bl+Fg)+Bw+Fg/2, 3*(Bh+Fg) ]) wallhalf(8, 2, 0,0,0);
+
+// Fensterbank
+translate([ 170.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Bh, (Bh+Fg)*4 ]) cube([ 14*(Bw+Fg)+Fg, Bl, Bh ]);
+translate([ 170.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Bh+Fg*2, (Bh+Fg)*4 ]) rotate([30,0,0]) cube([ 14*(Bw+Fg)+Fg, Bl-Fg, Bh ]);
+translate([ 170.25*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Bl, (Bh+Fg)*4 ]) cube([ 14*(Bw+Fg)+Fg, Bh, 15 ]);
+
+translate([ 179.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Bh, (Bh+Fg)*4 ]) cube([ 14*(Bw+Fg)+Fg, Bl, Bh ]);
+translate([ 179.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Bh+Fg*2, (Bh+Fg)*4 ]) rotate([30,0,0]) cube([ 14*(Bw+Fg)+Fg, Bl-Fg, Bh ]);
+translate([ 179.75*(Bl+Fg)-Fg, 2.5*(Bl+Fg)+Bl, (Bh+Fg)*4 ]) cube([ 14*(Bw+Fg)+Fg, Bh, 15 ]);
+
+//Keller
+translate([ 168*(Bl+Fg)-Fg*2, 2.5*(Bl+Fg)-Fg, -5*(Bh+Fg)-Bw-Fg ]) basement( 0, 71, 1, 2);
+translate([ 168*(Bl+Fg)-Fg*2, 2.5*(Bl+Fg)-Fg, -12*(Bh+Fg)-Bw-Fg ]) wall(21.91, 7, 0,0,1);
 
 
 
 
+//translate([ 0, 28.5*(Bl+Fg)-Fg, 0]) 
+{
+// Gleisseite
+// Ornament Mitte
+translate([ 168.75*(Bl+Fg), 31*(Bl+Fg)-Fg, 57*(Bh+Fg) ]) wallhalf(20.5,1,0,0,1);
+for ( i = [ 0 : Bl+Fg : 18*(Bl+Fg) ])
+translate([ 169.25*(Bl+Fg)+i, 31*(Bl+Fg)-Fg+2.5, 56*(Bh+Fg) ]) cube([Bw,Bw,Bh]);
+for ( i = [ 0 : Bl+Fg : 18*(Bl+Fg) ])
+translate([ 169.75*(Bl+Fg)+i, 31*(Bl+Fg)-Fg+5, 56*(Bh+Fg) ]) cube([Bw,Bw,Bh]);
+for ( i = [ 0 : Bl+Fg : 18*(Bl+Fg) ])
+translate([ 169.25*(Bl+Fg)+i, 31*(Bl+Fg)-Fg+5, 55*(Bh+Fg) ]) cube([Bw,Bw,Bh]);
 
+difference(){union(){
+translate([ 168*(Bl+Fg)-Fg*2, 31.88*(Bl+Fg)-Fg, 40*(Bh+Fg) ]) wallhalf(1.5, 44, 0,0,1);
+translate([ 168*(Bl+Fg)-Fg*2, 30.88*(Bl+Fg)+Bw/2, 40*(Bh+Fg) ]) wall(21.91, 18, 0,0,0);
+translate([ 187.75*(Bl+Fg), 31.88*(Bl+Fg)-Fg, 40*(Bh+Fg) ]) wallhalf(2, 44, 0,0,1);
 
+// Fenster oben
+translate([ 168*(Bl+Fg)-Fg*2, 30.88*(Bl+Fg)+Bw/2, 58*(Bh+Fg) ]) wall(3.43, 18, 0,0,0);
+translate([ 173.25*(Bl+Fg), 30.88*(Bl+Fg)+Bw/2, 58*(Bh+Fg) ]) wall(1, 18, 0,0,0);
+translate([ 176.25*(Bl+Fg), 30.88*(Bl+Fg)+Bw/2, 58*(Bh+Fg) ]) wall(4.5, 18, 0,0,0);
+translate([ 182.75*(Bl+Fg), 30.88*(Bl+Fg)+Bw/2, 58*(Bh+Fg) ]) wall(1, 18, 0,0,0);
+translate([ 186*(Bl+Fg)-Fg*2, 30.88*(Bl+Fg)+Bw/2, 58*(Bh+Fg) ]) wall(3.91, 18, 0,0,0);
+translate([ 168*(Bl+Fg)-Fg*2, 30.88*(Bl+Fg)+Bw/2, 76*(Bh+Fg) ]) wall(21.91, 8, 0,0,0);
+}
+translate([ 171.25*(Bl+Fg)-Fg, 30.88*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) bbcut( 9, 70, 0.65 );
+translate([ 174.25*(Bl+Fg)-Fg, 30.88*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) bbcut( 9, 70, 0.65 );
+translate([ 180.75*(Bl+Fg)-Fg, 30.88*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) bbcut( 9, 70, 0.65 );
+translate([ 183.75*(Bl+Fg)-Fg, 30.88*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) bbcut( 9, 70, 0.65 );
+}
 
-
+translate([ 171.25*(Bl+Fg)-Fg, 30.88*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) brickbow( 9, 70, 0.65, 2 );
+translate([ 174.25*(Bl+Fg)-Fg, 30.88*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) brickbow( 9, 70, 0.65, 2 );
+translate([ 180.75*(Bl+Fg)-Fg, 31*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) brickbow( 9, 70, 0.65, 2 );
+translate([ 183.75*(Bl+Fg)-Fg, 31*(Bl+Fg)+Fg*2, (Bh+Fg)*73 ]) brickbow( 9, 70, 0.65, 2 );
+}
 
 
 
